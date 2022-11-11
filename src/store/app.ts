@@ -2,16 +2,19 @@ import type { StoreDefinition } from "pinia";
 import { defineStore } from "pinia";
 import type { TokenRequest } from "@/api/types";
 import tokenApi from "@/api/token";
+import {useUserStore} from "@/store/user";
 
 type AppState = {
   token: string;
+  menuCollapse: boolean;
 };
-export const useAppStore: StoreDefinition<string, AppState> = defineStore(
+export const useAppStore = defineStore(
   "app",
   {
-    state: () => {
+    state: ():AppState => {
       return {
         token: "",
+          menuCollapse:false,
       };
     },
     persist: true,
@@ -19,6 +22,11 @@ export const useAppStore: StoreDefinition<string, AppState> = defineStore(
       async login(loginForm: TokenRequest): Promise<void> {
         this.token = await tokenApi.createToken(loginForm);
       },
+        async logout(): Promise<void>{
+          const userStore = useUserStore()
+          this.token = "";
+          userStore.$reset();
+        }
     },
   }
 );
