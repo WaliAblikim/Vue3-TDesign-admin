@@ -16,7 +16,7 @@ export const useUserStore = defineStore('user',{
     actions:{
         async fetchCurrentUser(){
             this.currentUser = await userApi.me();
-            usePermissionStore().generateRoutes(this.currentUser.permission)
+            usePermissionStore().generateRoutes(this.currentUser.permissions)
         },
     }
 }

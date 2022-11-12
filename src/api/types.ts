@@ -12,5 +12,5 @@ export type UserType = {
   username:string;
   nickname:string;
   role:Array<string>;
-  permission:Array<string>;
+  permissions:Array<string>;
 }
