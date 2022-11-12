@@ -1,11 +1,11 @@
 import {defineStore} from "pinia";
 import type {UserType} from "@/api/types";
 import userApi from "@/api/user";
+import {usePermissionStore} from "@/store/permission";
 
 type UserState = {
     currentUser:UserType | null;
 }
-
 export const useUserStore = defineStore('user',{
     state:(): UserState =>{
         return{
@@ -16,7 +16,8 @@ export const useUserStore = defineStore('user',{
     actions:{
         async fetchCurrentUser(){
             this.currentUser = await userApi.me();
-        }
+            usePermissionStore().generateRoutes(this.currentUser.permission)
+        },
     }
 }
 )
