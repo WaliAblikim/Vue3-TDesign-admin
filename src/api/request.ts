@@ -29,7 +29,7 @@ instance.interceptors.response.use(
   async (error: AxiosError<ErrorResponse>) => {
     const responseData: ErrorResponse | undefined = error.response?.data;
     responseData && (await MessagePlugin.error(responseData.message));
-    if(error.response?.status ===401){
+    if(error.response?.status ===401 || error.response?.status ===403){
       const appStore = useAppStore();
       await appStore.logout();
     }
