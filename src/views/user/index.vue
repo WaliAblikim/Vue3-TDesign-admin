@@ -34,7 +34,7 @@
           theme="primary"
           @click="handleEdit(slotProps)"
         >
-          <Icon name="edit"></Icon>
+          <icon name="edit"></icon>
           编辑
         </t-button>
       </template>
@@ -44,6 +44,7 @@
     :show="showDialog"
     :data="editData"
     @close="onDialogClose"
+    @confirm="handleConfirm"
   ></edit-dialog>
 </template>
 
@@ -53,7 +54,7 @@ import { Icon } from "tdesign-vue-next";
 import { useSearch } from "@/composables/useSearch";
 import userApi from "@/api/user";
 import { reactive } from "vue";
-import type { UserType } from "@/api/types";
+import type { UserCreateRequest, UserType } from "@/api/types";
 import EditDialog from "@/views/user/edit-dialog.vue";
 import { useEditDialog } from "@/composables/useEditDialog";
 const columns = [
@@ -79,10 +80,15 @@ const defaultData: UserType = {
   roles: [],
   permissions: [],
 };
-const { showDialog, editData, handleEdit, handleCreate, onDialogClose } =
-  useEditDialog(defaultData);
+const {
+  showDialog,
+  editData,
+  handleCreate,
+  handleEdit,
+  onDialogClose,
+  handleConfirm,
+} = useEditDialog<UserType, UserCreateRequest>(userApi, "用户");
 </script>
-
 <style lang="less" scoped>
 .search-area {
   margin-top: 20px;

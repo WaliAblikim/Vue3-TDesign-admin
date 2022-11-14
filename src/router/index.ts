@@ -1,8 +1,8 @@
 import type { RouteRecordRaw } from "vue-router";
 import { createRouter, createWebHashHistory } from "vue-router";
 import LoginView from "@/views/login/index.vue";
-import PageLayoutView from "@/views/common/page-layout.vue"
 import LayoutView from "@/views/common/layout.vue";
+import PageLayoutView from "@/views/common/page-layout.vue";
 import { useAppStore } from "@/store";
 import { PermissionEnum } from "@/config/permission.config";
 
@@ -14,7 +14,8 @@ declare module "vue-router" {
   }
 }
 
- export const MENU_ROUTE_NAME = "menuRout";
+export const MENU_ROUTE_NAME = "menuRoot";
+
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -23,8 +24,8 @@ export const routes: Array<RouteRecordRaw> = [
     redirect: "dashboard",
     children: [
       {
-        path: "dashboard",
         name: "dashboard",
+        path: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
           permission: PermissionEnum.DASHBOARD,
@@ -46,11 +47,21 @@ export const routes: Array<RouteRecordRaw> = [
           {
             name: "user-list",
             path: "list",
-            component: ()=> import("@/views/user/index.vue"),
+            component: () => import("@/views/user/index.vue"),
             meta: {
               title: "用户管理",
               icon: "user",
               permission: PermissionEnum.USER_LIST,
+            },
+          },
+          {
+            name: "role-list",
+            path: "roles",
+            component: () => import("@/views/user/roles.vue"),
+            meta: {
+              title: "角色管理",
+              permission: PermissionEnum.USER_ROLES,
+              icon: "secured",
             },
           },
         ],
@@ -74,7 +85,7 @@ router.beforeEach((to, from, next) => {
   if (!appStore.token) {
     whiteList.indexOf(to.path) !== -1
       ? next()
-      : next(`login?redirect=${to.path}`);
+      : next(`/login?redirect=${to.path}`);
   }
 
   if (appStore.token && to.path === "/login") {
