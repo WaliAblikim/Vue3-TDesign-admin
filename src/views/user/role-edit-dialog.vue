@@ -50,5 +50,4 @@ const handleConfirm = () => {
   emit("confirm", role.value);
 };
 </script>
-
 <style scoped></style>
