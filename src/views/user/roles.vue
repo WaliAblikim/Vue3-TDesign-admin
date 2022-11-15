@@ -1,5 +1,4 @@
 <template>
-  <template>
     <t-card>
       <div class="action-area">
         <t-button
@@ -52,7 +51,6 @@
         @close="onDialogClose"
         @confirm="handleConfirm"
     ></role-edit-dialog>
-  </template>
 </template>
 
 <script lang="ts" setup>
