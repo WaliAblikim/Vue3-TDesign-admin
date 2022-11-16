@@ -8,6 +8,7 @@ import router from "@/router";
 import "tdesign-vue-next/dist/reset.css";
 
 import "tdesign-vue-next/es/style/index.css";
+import "@/assets/base.less"
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import {permissionDirective} from "@/directives/permission";

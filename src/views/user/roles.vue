@@ -89,12 +89,5 @@ const { data, fetchData, pagination, loading, onPageChange } = useSearch<
     >(roleApi, searchKey);
 </script>
 <style lang="less" scoped>
-.search-area {
-  margin-top: 20px;
-  display: flex;
-  .search-input {
-    width: 200px;
-    margin-right: 20px;
-  }
-}
+
 </style>
