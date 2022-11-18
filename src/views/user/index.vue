@@ -84,13 +84,6 @@ const { data, fetchData, pagination, loading, onPageChange } = useSearch<
     name: string;
   }
 >(userApi, searchKey);
-const defaultData: UserType = {
-  id: "",
-  username: "",
-  nickname: "",
-  roles: [],
-  permissions: [],
-};
 const {
   showDialog,
   editData,
