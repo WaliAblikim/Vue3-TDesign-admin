@@ -4,7 +4,7 @@
       <t-button
         v-permission="PermissionEnum.USER_LIST_CREATE"
         @click="handleCreate"
-        >创建用户
+      >创建用户
       </t-button>
     </div>
     <div class="search-area">
@@ -45,7 +45,7 @@
           theme="primary"
           variant="light"
           style="margin-right: 8px; cursor: pointer"
-          >{{ ROLE_DICT[role] }}
+        >{{ role }}
         </t-tag>
       </template>
     </t-table>
@@ -67,7 +67,7 @@ import { reactive } from "vue";
 import type { UserCreateRequest, UserType } from "@/api/types";
 import EditDialog from "@/views/user/edit-dialog.vue";
 import { useEditDialog } from "@/composables/useEditDialog";
-import { ROLE_DICT } from "@/config/roles.config";
+
 const columns = [
   { colKey: "id", title: "ID" },
   { colKey: "username", title: "用户名" },
@@ -75,15 +75,18 @@ const columns = [
   { colKey: "roles", title: "角色" },
   { colKey: "operation", title: "操作" },
 ];
+
 const searchKey = reactive({
   name: "",
 });
+
 const { data, fetchData, pagination, loading, onPageChange } = useSearch<
   UserType,
   {
     name: string;
   }
->(userApi, searchKey);
+  >(userApi, searchKey);
+
 const {
   showDialog,
   editData,
@@ -93,13 +96,4 @@ const {
   handleConfirm,
 } = useEditDialog<UserType, UserCreateRequest>(userApi, "用户");
 </script>
-<style lang="less" scoped>
-.search-area {
-  margin-top: 20px;
-  display: flex;
-  .search-input {
-    width: 200px;
-    margin-right: 20px;
-  }
-}
-</style>
+<style lang="less" scoped></style>
